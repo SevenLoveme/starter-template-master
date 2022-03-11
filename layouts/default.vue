@@ -60,7 +60,7 @@
 
           <li id="no-login">
 
-            <a href="/sing_in" title="登录">
+            <a href="/user/login" title="登录">
 
               <em class="icon18 login-icon">&nbsp;</em>
 
@@ -70,7 +70,7 @@
 
             |
 
-            <a href="/sign_up" title="注册">
+            <a href="/user/register" title="注册">
 
               <span class="vam ml5">注册</span>
 
