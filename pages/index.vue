@@ -240,6 +240,9 @@ export default {
     this.getIndex()
   },
   methods: {
+
+    //回显用户信息
+
     getBannerList() {
       banner.getListBanner()
         .then(result => {

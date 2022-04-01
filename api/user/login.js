@@ -1,13 +1,20 @@
 import request from "../../utils/request";
 export default {
 
-  //登陆
-  userRegister(member){
+  //登录
+  userLogin(userInfo){
     return request({
-      url:`/educenter/member/register`,
+      url:`/educenter/member/login`,
       method:'post',
-      data:member
+      data:userInfo
     })
   },
 
+  //通过token获取用户信息
+  getUserInfo(){
+    return request({
+      url:`/educenter/member/getUserInfo`,
+      method:'get',
+    })
+  }
 }

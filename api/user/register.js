@@ -1,8 +1,8 @@
 import request from "../../utils/request";
 export default {
-  
+
   //注册
-  userLogin(RegisterVo){
+  userRegister(RegisterVo){
     return request({
       url:`/educenter/member/register`,
       method:'post',
@@ -15,15 +15,6 @@ export default {
     return request({
       url:`/edumsm/msm/send/${phoneNumber}`,
       method:'get'
-    })
-  },
-
-  //登陆
-  userRegister(member){
-    return request({
-      url:`/educenter/member/register`,
-      method:'post',
-      data:member
     })
   },
 }
