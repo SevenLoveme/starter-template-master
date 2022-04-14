@@ -10,9 +10,9 @@
 
         <h1 id="logo">
 
-          <a href="#" title="谷粒学院">
+          <a href="/" title="西安外事学院">
 
-            <img src="~/assets/img/logo.png" width="100%" alt="谷粒学院">
+            <img src="~/assets/img/wslogo.png" width="100%" alt="西安外事学院">
 
           </a>
 
@@ -40,13 +40,13 @@
 
             </router-link>
 
-            <router-link to="/article" tag="li" active-class="current">
+            <router-link to="#" tag="li" active-class="current" @click.native="messageInfo">
 
               <a>文章</a>
 
             </router-link>
 
-            <router-link to="/qa" tag="li" active-class="current">
+            <router-link to="#" tag="li" active-class="current" @click.native="messageInfo">
 
               <a>问答</a>
 
@@ -90,21 +90,18 @@
 
           <aside class="h-r-search">
 
-            <form action="#" method="post">
 
               <label class="h-r-s-box">
 
-                <input type="text" placeholder="输入你想学的课程" name="queryCourse.courseName" value>
+                <input v-model="search" type="text"  placeholder="输入你想学的课程" />
 
-                <button type="submit" class="s-btn">
+                <button @click="searchCourse" type="submit" class="s-btn">
 
                   <em class="icon18">&nbsp;</em>
 
                 </button>
 
               </label>
-
-            </form>
 
           </aside>
 
@@ -146,7 +143,7 @@
 
             <li>
 
-              <a href="http://www.atguigu.com/" title="尚硅谷" target="_blank">尚硅谷</a>
+              <a href="https://github.com/SevenLoveme/starter-template-master" title="项目地址" target="_blank">项目地址</a>
 
             </li>
 
@@ -172,15 +169,14 @@
 
                 <a href="#" title="资源下载" target="_blank">资源下载</a>|
 
-                <span>服务热线：010-56253825(北京) 0755-85293825(深圳)</span>
+                <span>服务热线：17792424871</span>
 
-                <span>Email：info@atguigu.com</span>
+                <span>Email：3105674895@qq.com</span>
 
               </section>
 
               <section class="b-f-link mt10">
 
-                <span>©2018课程版权均归谷粒学院所有 京ICP备17055252号</span>
 
               </section>
 
@@ -194,7 +190,7 @@
 
            <span>
 
-             <img src="~/assets/img/wx-icon.png" alt>
+             <img src="~/assets/img/wx-icon.png" />
 
            </span>
 
@@ -204,7 +200,7 @@
 
            <span>
 
-             <img src="~/assets/img/wb-icon.png" alt>
+             <img src="~/assets/img/wb-icon.png" />
 
            </span>
 
@@ -224,12 +220,9 @@
 
 <script>
 
-import "~/assets/css/reset.css";
-import "~/assets/css/theme.css";
-import "~/assets/css/global.css";
-import "~/assets/css/web.css";
 import cookie from "js-cookie";
-import login from "../api/user/login";import '~/assets/css/reset.css'
+import login from "../api/user/login";
+import '~/assets/css/reset.css'
 import '~/assets/css/theme.css'
 import '~/assets/css/global.css'
 import '~/assets/css/web.css'
@@ -240,11 +233,11 @@ import '~/assets/css/nice_select.css'
 import '~/assets/css/order.css'
 import '~/assets/css/swiper-3.3.1.min.css'
 import "~/assets/css/pages-weixinpay.css"
-
 export default {
   data() {
     return {
       token:'',
+      search:'',
       loginInfo: {
         id: '',
         age: '',
@@ -256,6 +249,17 @@ export default {
     }
   },
   methods: {
+    messageInfo(){
+      this.$message({
+        showClose: true,
+        message: '该功能已被封印',
+      })
+      window.location.href="/"
+    },
+    searchCourse(){
+      cookie.set('search', this.search)
+      window.location.href="/course"
+    },
     //微信登录显示
     wxLogin() {
       cookie.set('my_token',this.token, {domain: 'localhost'})

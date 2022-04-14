@@ -24,9 +24,9 @@
 
         <article class="c-v-pic-wrap" style="height: 357px;">
 
-          <section class="p-h-video-box" id="videoPlay">
+          <section class="p-h-video-box"  id="videoPlay">
 
-            <img :src="courseInfo.cover" :alt="courseInfo.title" class="dis c-v-pic">
+            <img :src="courseInfo.cover" :alt="courseInfo.title" style="width: 195%;height: 100%" class="dis c-v-pic">
 
           </section>
 
@@ -281,7 +281,7 @@
 
                     <section class="hLh30 txtOf">
 
-                      <a class="c-333 fsize16 fl" href="#">{{ courseInfo.teacherName }}</a>
+                      <a class="c-333 fsize16 fl" :href="/teacher/+courseInfo.teacherId">{{ courseInfo.teacherName }}</a>
 
                     </section>
 
@@ -340,7 +340,7 @@
         <section class="">
           <section class="question-list lh-bj-list pr">
             <ul class="pr10">
-              <li v-for="(comment,index) in data.items" v-bind:key="index">
+              <li v-for="(comment,indexParent) in data.items" v-bind:key="indexParent">
                 <aside class="noter-pic">
                   <img width="50" height="50" class="picImg" :src="comment.avatar">
                 </aside>
@@ -372,7 +372,7 @@
                     <!--                              </div>-->
 
                     <!--                            </el-dialog>-->
-                    <a class="fsize12 c-999 mr5" @click="getCommentAnswer(comment.id,index);">回复</a>
+                    <a class="fsize12 c-999 mr5" @click="getCommentAnswer(comment.id,indexParent);">回复</a>
                     <a v-if="userInfo.id==comment.memberId" class="fsize12 c-999 mr5"
                        @click="deleteComment(comment.id)">删除</a>
                   </span>
@@ -411,12 +411,12 @@
                 </ul>
               <div style="margin: 20px 0;"></div>
               <div>
-                <el-input v-if="inputCommentAnswer==index" type="textarea" placeholder="请输入内容" v-model="textarea"
+                <el-input v-if="inputCommentAnswer==indexParent" type="textarea" placeholder="请输入内容" v-model="textarea"
                           maxlength="500" show-word-limit></el-input>
 
-                <p v-if="inputCommentAnswer==index" class="of mt5 tar pl10 pr10">
+                <p v-if="inputCommentAnswer==indexParent" class="of mt5 tar pl10 pr10">
                   <span class="fl "><tt class="c-red commentContentmeg" style="display: none;"></tt></span>
-                  <el-button class="lh-reply-btn" type="text" @click="addCommentAnswer(comment.id)">提交</el-button>
+                  <el-button class="lh-reply-btn" type="text" @click="addCommentAnswer(comment.id,indexParent)">提交</el-button>
                 </p>
               </div>
               </li>
@@ -529,8 +529,8 @@ export default {
             type: 'error',
           })
         }
-        this.gotoPage(1)
         this.comment.content=''
+        this.gotoPage(1)
       })
     },
     getUserInfo() {
@@ -552,12 +552,12 @@ export default {
         this.getCommentAnswer(commentParentId)
       })
     },
-    addCommentAnswer(commentId) {
+    addCommentAnswer(commentId,indexParent) {
       this.comment.content = this.textarea
       this.comment.commentParentId = commentId
       this.addComment()
       this.gotoPage(this.data.current)
-      this.getCommentAnswer(commentId)
+      this.getCommentAnswer(commentId,indexParent);
     },
     getCommentAnswer(commentId,index) {
       if (index!=null){

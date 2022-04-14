@@ -16,7 +16,7 @@
 
         <section class="c-tab-title">
 
-          <a id="subjectAll" title="全部" href="#">全部</a>
+<!--          <a id="subjectAll" title="全部" href="#">全部</a>-->
 
           <!-- <c:forEach var="subject" items="${subjectList }">
 

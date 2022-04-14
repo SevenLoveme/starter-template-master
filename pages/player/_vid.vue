@@ -13,45 +13,58 @@
 <script>
 
 import vod from "../../api/vod";
-import { Loading } from 'element-ui';
+import {Loading} from 'element-ui';
 
 export default {
+  layout: 'video',
+  data() {
+    return {
+      playAuth: '',
+      videoId: ''
+    }
+  },
+  created() {
 
-  layout: 'video',//应用video布局
-  asyncData({params}) {
-    return vod.getPlayAuth(params.vid)
-      .then(result => {
-        return {
-          playAuth: result.data.data.videoAuth,
-          videoId: params.vid
-        }
-      })
   },
   /**
    * 页面渲染完成时：此时js脚本已加载，Aliplayer已定义，可以使用
    * 如果在created生命周期函数中使用，Aliplayer is not defined错误
    */
   mounted() {
+    var vid = this.$route.params.vid
+    this.getPlayAuth(vid)
+  },
+  methods:{
+    getPlayAuth(vid){
+      vod.getPlayAuth(vid)
+        .then(result => {
+          this.playAuth = result.data.data.videoAuth
+          this.videoId = vid
+          this.show()
+        })
+    },
+    show(){
+      new Aliplayer({
+          id: 'J_prismPlayer',
+          encryptType: '1', // 如果播放加密视频，则需设置encryptType=1，非加密视频无需设置此项
+          qualitySort: 'asc', // 清晰度排序
 
-    new Aliplayer({
-      id: 'J_prismPlayer',
-      encryptType: '1', // 如果播放加密视频，则需设置encryptType=1，非加密视频无需设置此项
-      qualitySort: 'asc', // 清晰度排序
-
-      mediaType: 'video', // 返回音频还是视频
-      autoplay: false, // 自动播放
-      isLive: false, // 直播
-      rePlay: false, // 循环播放
-      preload: true,
-      controlBarVisibility: 'hover', // 控制条的显示方式：鼠标悬停
-      useH5Prism: true, // 播放器类型：html5
-      width: '1200px',
-      height: '675px',
-      vid: this.videoId, // 视频id
-      playauth: this.playAuth, // 播放凭证
-    }, function (player) {
-      console.log('播放器创建成功')
-    })
-  }
+          mediaType: 'video', // 返回音频还是视频
+          autoplay: false, // 自动播放
+          isLive: false, // 直播
+          rePlay: false, // 循环播放
+          preload: true,
+          controlBarVisibility: 'hover', // 控制条的显示方式：鼠标悬停
+          useH5Prism: true, // 播放器类型：html5
+          width: '1200px',
+          height: '675px',
+          vid: this.videoId, // 视频id
+          playauth: this.playAuth, // 播放凭证
+        }, function (player) {
+          console.log('播放器创建成功')
+        }
+      )
+    }
+  },
 }
 </script>

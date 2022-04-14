@@ -26,7 +26,7 @@
 
             <section class="t-infor-pic">
 
-              <img src="~/assets/photo/teacher/1442297885942.jpg">
+              <img :src="teacher.avatar">
 
             </section>
 
@@ -43,6 +43,7 @@
             </section>
 
             <section class="t-infor-txt">
+              <hr>
 
               <p class="mt20">{{teacher.intro}}</p>
 
@@ -92,7 +93,7 @@
 
                     <div class="cc-mask">
 
-                      <a href="#" title="开始学习" target="_blank" class="comm-btn c-btn-1">开始学习</a>
+                      <a :href="/course/+course.id" title="开始学习" target="_blank" class="comm-btn c-btn-1">开始学习</a>
 
                     </div>
 

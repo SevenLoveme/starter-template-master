@@ -4,7 +4,7 @@
 
       <div class="title">
 
-        <a class="active" href="/login">登录</a>
+        <a class="active" href="/user/login">登录</a>
 
         <span>·</span>
 

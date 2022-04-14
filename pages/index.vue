@@ -3,33 +3,16 @@
 
   <div>
 
-    <!-- 幻灯片 开始 -->
-    <div v-swiper:mySwiper="swiperOption">
+    <br>
+      <el-carousel :interval="4000" type="card" height="420px" >
+        <el-carousel-item v-for="banner in bannerList" :key="banner.id">
+        <a target="_blank" :href="banner.linkUrl">
 
-      <div class="swiper-wrapper">
+          <img :src="banner.imageUrl" :alt="banner.title" style="width: 1050px;height: 420px">
 
-        <div v-for="banner in bannerList" :key="banner.id" class="swiper-slide" style="background: #040B1B;">
-
-          <a target="_blank" href="/">
-
-            <img :src="banner.imageUrl" :alt="banner.title" style="width: 1200px;height: 480px">
-
-          </a>
-
-        </div>
-
-      </div>
-
-      <div class="swiper-pagination swiper-pagination-white"></div>
-
-      <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-
-      <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-
-    </div>
-
-    <!-- 幻灯片 结束 -->
-
+        </a>
+        </el-carousel-item>
+      </el-carousel>
 
     <div id="aCoursesList">
 
@@ -73,7 +56,7 @@
 
                       <div class="cc-mask">
 
-                        <a href="#" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
+                        <a :href="'/course/'+course.id" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
 
                       </div>
 
@@ -117,7 +100,7 @@
 
             <section class="tac pt20">
 
-              <a href="#" title="全部课程" class="comm-btn c-btn-2">全部课程</a>
+              <a href="/course" title="全部课程" class="comm-btn c-btn-2">全部课程</a>
 
             </section>
 
@@ -193,7 +176,7 @@
 
             <section class="tac pt20">
 
-              <a href="#" title="全部讲师" class="comm-btn c-btn-2">全部讲师</a>
+              <a href="/teacher" title="全部讲师" class="comm-btn c-btn-2">全部讲师</a>
 
             </section>
 
@@ -260,3 +243,20 @@ export default {
   }
 }
 </script>
+<style>
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 200px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+  background-color: #d3dce6;
+}
+</style>

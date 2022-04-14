@@ -203,6 +203,7 @@ export default {
     },
     getCodeFun() {
       this.sending = false
+      debugger
       this.timeDown()
       register.userSendCode(this.params.mobile).then(result => {
         this.$message({
